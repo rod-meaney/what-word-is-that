@@ -1,0 +1,53 @@
+runtime: python27
+api_version: 1
+threadsafe: true
+
+libraries:
+- name: django
+  version: "1.4"
+
+handlers:
+- url: /edit/static/js/(.*)
+  static_files: edit/static/js/\1
+  upload: edit/static/js/(.*)
+  
+- url: /edit/static/css/(.*)
+  static_files: edit/static/css/\1
+  upload: edit/static/css/(.*)
+  
+- url: /edit/static/media/(.*)
+  static_files: edit/static/media/\1
+  upload: edit/static/media/(.*)
+  
+- url: /edit/(.*\.(json|ico))$
+  static_files: edit/\1
+  upload: edit/.*\.(json|ico)$
+
+- url: /static/js/(.*)
+  static_files: read/static/js/\1
+  upload: read/static/js/(.*)
+  
+- url: /static/css/(.*)
+  static_files: read/static/css/\1
+  upload: read/static/css/(.*)
+  
+- url: /static/media/(.*)
+  static_files: read/static/media/\1
+  upload: read/static/media/(.*)
+  
+- url: /(.*\.(json|ico))$
+  static_files: read/\1
+  upload: read/.*\.(json|ico)$
+   
+- url: /api/read/.*
+  script: api_read.app
+
+- url: /api/write/.*
+  script: api_write.app
+
+- url: /edit/.*
+  script: edit.app
+  login: required
+ 
+- url: /.*
+  script: read.app
