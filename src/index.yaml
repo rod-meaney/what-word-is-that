@@ -21,6 +21,17 @@ indexes:
   - name: date_start
     direction: desc
 
+- kind: List
+  properties:
+  - name: private
+  - name: name
+
+- kind: List
+  properties:
+  - name: private
+  - name: name
+    direction: desc
+
 - kind: TimesheetEntry
   properties:
   - name: google_id
