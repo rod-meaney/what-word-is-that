@@ -12,7 +12,7 @@ class MainPage(StandardPage):
         self.response.out.write(template.render('read/index.html', self.template_values))
 
 class DataSearch(webapp2.RequestHandler):
-    @url_inject("json")
+    #@url_inject("json")
     def get(self):
         self.response.out.write(json.dumps(List().all_lists_unauthenticated()))
 
