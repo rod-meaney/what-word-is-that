@@ -12,9 +12,8 @@ class MainPageEdit(StandardPage):
         self.response.out.write(template.render('edit/index.html', self.template_values))
 
 class DataSaveList(webapp2.RequestHandler):
-    @url_inject("json")
+    #@url_inject("json")
     def post(self):
-        logging.info("Received: " + self.request.body)
         ls = List()
         ls.save_list(json.loads(self.request.body))
         self.response.out.write(json.dumps({"response":"saved"}))

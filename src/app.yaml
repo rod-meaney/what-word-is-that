@@ -37,7 +37,7 @@ handlers:
   
 - url: /(.*\.(json|ico|png))$
   static_files: read/\1
-  upload: read/.*\.(json|ico\png)$
+  upload: read/.*\.(json|ico|png)$
    
 - url: /api/read/.*
   script: api_read.app

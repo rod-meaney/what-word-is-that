@@ -14,7 +14,7 @@ class List(df.DomainFramework):
     google_id = db.StringProperty()
     name = db.StringProperty()
     description = db.StringProperty(multiline=True)
-    items = db.StringProperty(multiline=True)
+    items = db.TextProperty()
     private = db.BooleanProperty()
     
     def __init__(self, *args, **kwargs):  

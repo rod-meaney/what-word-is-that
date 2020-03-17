@@ -10,17 +10,6 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
-- kind: Booking
-  properties:
-  - name: google_id
-  - name: date_start
-
-- kind: Booking
-  properties:
-  - name: google_id
-  - name: date_start
-    direction: desc
-
 - kind: List
   properties:
   - name: private
@@ -30,23 +19,4 @@ indexes:
   properties:
   - name: private
   - name: name
-    direction: desc
-
-- kind: TimesheetEntry
-  properties:
-  - name: google_id
-  - name: date
-
-- kind: TimesheetEntry
-  properties:
-  - name: google_id
-  - name: date
-    direction: desc
-
-- kind: TimesheetEntry
-  properties:
-  - name: google_id
-  - name: date
-    direction: desc
-  - name: created
     direction: desc
