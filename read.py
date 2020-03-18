@@ -14,7 +14,7 @@ class MainPage(StandardPage):
 class DataTest(webapp2.RequestHandler):
     #@url_inject("json")
     def get(self):
-        self.response.out.write(json.dumps({"test":"there"}))
+        self.response.out.write(json.dumps({"test":"everywhere"}))
 
 class DataSearch(webapp2.RequestHandler):
     #@url_inject("json")
