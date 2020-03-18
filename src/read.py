@@ -11,6 +11,11 @@ class MainPage(StandardPage):
     def get(self):
         self.response.out.write(template.render('read/index.html', self.template_values))
 
+class DataTest(webapp2.RequestHandler):
+    #@url_inject("json")
+    def get(self):
+        self.response.out.write(json.dumps({"test":"here"}))
+
 class DataSearch(webapp2.RequestHandler):
     #@url_inject("json")
     def get(self):
@@ -24,6 +29,7 @@ class DataGet(webapp2.RequestHandler):
         
 app = webapp2.WSGIApplication([
         ('/api/search', DataSearch),
+        ('/api/test', DataTest),
         ('/api/get.*', DataGet),
         ('/.*', MainPage),
         ],debug=True)
