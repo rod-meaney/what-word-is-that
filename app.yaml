@@ -38,12 +38,6 @@ handlers:
 - url: /(.*\.(json|ico|png|wav))$
   static_files: read/\1
   upload: read/.*\.(json|ico|png|wav)$
-   
-- url: /api/read/.*
-  script: api_read.app
-
-- url: /api/write/.*
-  script: api_write.app
 
 - url: /edit/.*
   script: edit.app

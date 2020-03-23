@@ -18,8 +18,7 @@ class DataSaveList(webapp2.RequestHandler):
         ls.save_list(json.loads(self.request.body))
         self.response.out.write(json.dumps({"response":"saved"}))
         
-app = webapp2.WSGIApplication(
-                                     [('/edit/api/save', DataSaveList),
-                                         ('/edit/.*', MainPageEdit),
+app = webapp2.WSGIApplication([('/edit/api/save', DataSaveList),
+                               ('/edit/.*', MainPageEdit),
                                       ],
                                      debug=True)
