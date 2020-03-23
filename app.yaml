@@ -19,9 +19,9 @@ handlers:
   static_files: edit/static/media/\1
   upload: edit/static/media/(.*)
   
-- url: /edit/(.*\.(json|ico|png))$
+- url: /edit/(.*\.(json|ico|png|wav))$
   static_files: edit/\1
-  upload: edit/.*\.(json|ico|png)$
+  upload: edit/.*\.(json|ico|png|wav)$
 
 - url: /static/js/(.*)
   static_files: read/static/js/\1
@@ -35,9 +35,9 @@ handlers:
   static_files: read/static/media/\1
   upload: read/static/media/(.*)
   
-- url: /(.*\.(json|ico|png))$
+- url: /(.*\.(json|ico|png|wav))$
   static_files: read/\1
-  upload: read/.*\.(json|ico|png)$
+  upload: read/.*\.(json|ico|png|wav)$
    
 - url: /api/read/.*
   script: api_read.app
