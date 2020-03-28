@@ -23,7 +23,7 @@ class List(df.DomainFramework):
 
     def save_list(self, form):
         '''
-        Checking save to start
+        TO-DO Check the data in the backend
         '''
         errors=[]
         self.google_id=users.get_current_user().user_id()
@@ -38,8 +38,32 @@ class List(df.DomainFramework):
         
         return True
 
-    def all_lists_authenticated(self):
-        return ""
+    def update_list(self, form):
+        '''
+        TO-DO Check the data in the backend
+        '''
+        
+        ls = self.get(form['loaded_id'])
+        if users.get_current_user().user_id()<>ls.google_id:
+            raise KnownError(['Cannot update because you are not the owner of this list'])  
+        
+        ls.name = form['name']
+        ls.description = form['description']
+        ls.items = form['items']
+        ls.private = form['private']
+
+        ls.update()
+        
+        return True
+
+    def my_lists_authenticated(self):
+        results = []
+        query=self.all()
+        query.filter("google_id = ", users.get_current_user().user_id())
+        query.order("name")
+        for lItem in query.fetch(1000):
+            results.append(lItem.toDictSearch())
+        return results
     
     def all_lists_unauthenticated(self):
         results = []
@@ -50,13 +74,18 @@ class List(df.DomainFramework):
             results.append(lItem.toDictSearch())
         return results
 
-    def get_unauthenticated(self, key):
+    #Probably just one get in the end, with all the checks
+    def get_list(self, key):
         try:
             ls = self.get(key)
         except:
             raise KnownError(['You are trying to fetch a list that does not exist'])
         if ls.private:
-            raise KnownError(['You are not in the authenticated section.'])
+            try:
+                if ls.google_id <> users.get_current_user().user_id():
+                    raise KnownError(['You do not have access to that list.'])
+            except:
+                raise KnownError(['Not available to you'])
         return ls.toDict()
     
     def toDictSearch(self):

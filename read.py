@@ -27,7 +27,13 @@ class DataGet(webapp2.RequestHandler):
     @url_inject("json")
     def get(self):
         key = self.request.GET['id']
-        self.response.out.write(json.dumps(List().get_unauthenticated(key)))
+        logging.info("This is incorrect - we need to not check authentication here!")
+        self.response.out.write(json.dumps(List().get_list(key)))
+        
+class DataMyList(webapp2.RequestHandler):
+    #@url_inject("json")
+    def get(self):
+        self.response.out.write(json.dumps(List().my_lists_authenticated()))
 
 class UserGet(webapp2.RequestHandler):
     #@url_inject("json")
@@ -39,6 +45,7 @@ class UserGet(webapp2.RequestHandler):
         self.response.out.write(json.dumps({"response":user_nickname}))
         
 app = webapp2.WSGIApplication([
+        ('/api/my-lists', DataMyList),
         ('/api/user', UserGet),
         ('/api/search', DataSearch),
         ('/api/test', DataTest),

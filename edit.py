@@ -16,9 +16,30 @@ class DataSaveList(webapp2.RequestHandler):
     def post(self):
         ls = List()
         ls.save_list(json.loads(self.request.body))
+        self.response.out.write(json.dumps({"response":"updated"}))
+
+class DataUpdateList(webapp2.RequestHandler):
+    #@url_inject("json")
+    def post(self):
+        ls = List()
+        ls.update_list(json.loads(self.request.body))
         self.response.out.write(json.dumps({"response":"saved"}))
+
+class DataMyList(webapp2.RequestHandler):
+    #@url_inject("json")
+    def get(self):
+        self.response.out.write(json.dumps(List().my_lists_authenticated()))
         
-app = webapp2.WSGIApplication([('/edit/api/save', DataSaveList),
+class DataGet(webapp2.RequestHandler):
+    @url_inject("json")
+    def get(self):
+        key = self.request.GET['id']
+        self.response.out.write(json.dumps(List().get_list(key)))
+        
+app = webapp2.WSGIApplication([('/edit/api/my-lists', DataMyList),
+                               ('/edit/api/item.*', DataGet),
+                               ('/edit/api/save', DataSaveList),
+                               ('/edit/api/update', DataUpdateList),
                                ('/edit/.*', MainPageEdit),
                                       ],
                                      debug=True)

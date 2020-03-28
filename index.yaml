@@ -12,6 +12,11 @@ indexes:
 
 - kind: List
   properties:
+  - name: google_id
+  - name: name
+
+- kind: List
+  properties:
   - name: private
   - name: name
 
