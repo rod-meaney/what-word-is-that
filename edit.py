@@ -28,7 +28,11 @@ class DataUpdateList(webapp2.RequestHandler):
 class DataMyList(webapp2.RequestHandler):
     #@url_inject("json")
     def get(self):
-        self.response.out.write(json.dumps(List().my_lists_authenticated()))
+        try:
+            q = self.request.GET['q']
+        except:
+            q=""        
+        self.response.out.write(json.dumps(List().my_lists_authenticated(q)))
         
 class DataGet(webapp2.RequestHandler):
     @url_inject("json")
