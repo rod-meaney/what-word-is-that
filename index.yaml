@@ -23,6 +23,12 @@ indexes:
 
 - kind: List
   properties:
+  - name: name_index1=
+  - name: private
+  - name: name
+
+- kind: List
+  properties:
   - name: private
   - name: name
 
