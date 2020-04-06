@@ -24,27 +24,6 @@ class List(df.DomainFramework):
     def __init__(self, *args, **kwargs):  
         super(List, self).__init__(*args, **kwargs)
 
-    def index_word(self, item):
-        words = item.name.lower().split(" ")
-        if len(words)==1:
-            item.name_index1 = words[0].lower()[0:3]
-        else:
-            #get rid of all words
-            valid_words=[]
-            for word in words:
-                if len(word)==3:
-                    #don't index the array of words below
-                    if ['and','the'].index(word) > -1:
-                        valid_words.append(word)
-                if len(word) > 3:
-                    valid_words.append(word)
-            if len(valid_words) == 0:
-                item.name_index1 = item.name.lower()[0:3]
-            else:
-                if len(valid_words) > 0: item.name_index1 = valid_words[0].lower()[0:3]
-                if len(valid_words) > 1: item.name_index2 = valid_words[1].lower()[0:3] 
-                
-
     def save_list(self, form):
         '''
         TO-DO Check the data in the backend
@@ -73,8 +52,7 @@ class List(df.DomainFramework):
             raise KnownError(['Cannot update because you are not the owner of this list'])  
         
         ls.name = form['name']
-        #ls.name_index1 = form['name'].lower()[0:3]
-        ls.index_word(ls)
+        ls.name_index1 = form['name'].lower()[0:3]
         ls.description = form['description']
         ls.items = form['items']
         ls.private = form['private']
