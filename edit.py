@@ -39,9 +39,16 @@ class DataGet(webapp2.RequestHandler):
     def get(self):
         key = self.request.GET['id']
         self.response.out.write(json.dumps(List().get_list(key)))
+
+class DataDelete(webapp2.RequestHandler):
+    @url_inject("json")
+    def delete(self):
+        key = self.request.GET['id']
+        self.response.out.write(json.dumps(List().delete_list(key)))
         
 app = webapp2.WSGIApplication([('/edit/api/my-lists', DataMyList),
-                               ('/edit/api/item.*', DataGet),
+                               ('/edit/api/get.*', DataGet),
+                               ('/edit/api/delete.*', DataDelete),
                                ('/edit/api/save', DataSaveList),
                                ('/edit/api/update', DataUpdateList),
                                ('/edit/.*', MainPageEdit),

@@ -96,6 +96,21 @@ class List(df.DomainFramework):
             except:
                 raise KnownError(['Not available to you'])
         return ls.toDict()
+
+    #Probably just one get in the end, with all the checks
+    def delete_list(self, key):
+        try:
+            ls = self.get(key)
+        except:
+            raise KnownError(['You are trying to delete a list that does not exist'])
+
+        try:
+            if ls.google_id <> users.get_current_user().user_id():
+                raise KnownError(['You do not have access to that list.'])
+        except:
+            raise KnownError(['You do not have access to that list to delete'])
+        ls.delete()
+        return {"success":True}
     
     def toDictSearch(self):
         return {"name":self.name,
